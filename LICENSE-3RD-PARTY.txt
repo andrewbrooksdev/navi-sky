@@ -1,0 +1,21 @@
+-----------------------------------------------------------------------------
+Open Meteo
+
+License
+API data are offered under Attribution 4.0 International (CC BY 4.0)
+
+You are free to share: copy and redistribute the material in any medium or format and adapt: remix, transform, and build upon the material.
+
+Attribution: You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+
+You must include a link next to any location, Open-Meteo data are displayed like:
+
+<a href="https://open-meteo.com/">Weather data by Open-Meteo.com</a>
+
+Open-Meteo is open-source
+
+Source code is available on GitHub under the GNU Affero General Public License Version 3 AGPLv3 or any later version.
+
+Weather data by Open-Meteo.com. The API response from Open-Meteo.com has been modified by this application\'s API layer only to reduce response size. https://open-meteo.com/en/license
+
+-----------------------------------------------------------------------------
