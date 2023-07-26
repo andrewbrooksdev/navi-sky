@@ -31,4 +31,8 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'openmeteo' => [
+        'domain' => env('WEATHER_DOMAIN'),
+        'attribution' => 'Weather data by Open-Meteo.com. The API response from Open-Meteo.com has been modified by this application\'s API layer only to reduce response size. https://open-meteo.com/en/license'
+    ],
 ];
