@@ -8,9 +8,6 @@ This is the backend API for an app that allows a registered user to plan a trip 
 
 Designed around RESTful API conventions.
 
-## API Docs
-https://documenter.getpostman.com/view/28424968/2s946pWnxG
-
 ## Stack
 Laravel v10.14.1 using Laravel Sanctum for token based auth.
 
