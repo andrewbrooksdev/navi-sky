@@ -18,7 +18,7 @@ class WeatherResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'current_weather' => $this->current_weather,
+            'current_weather' => $this->get('current_weather'),
             'license' => config('services.openmeteo.attribution'),
         ];
     }
