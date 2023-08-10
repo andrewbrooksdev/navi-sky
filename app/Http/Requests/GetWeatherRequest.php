@@ -5,11 +5,12 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * @property mixed $lat
+ * @property mixed $lng
+ */
 class GetWeatherRequest extends FormRequest
 {
-    public mixed $lat;
-    public mixed $lng;
-
     /**
      * Determine if the user is authorized to make this request.
      */
