@@ -26,8 +26,8 @@ class GetWeatherRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'lat' => ['required', 'integer', 'numeric'],
-            'lng' => ['required', 'integer', 'numeric']
+            'lat' => ['required', 'numeric'],
+            'lng' => ['required', 'numeric']
         ];
     }
 }
