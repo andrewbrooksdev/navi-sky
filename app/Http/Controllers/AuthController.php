@@ -18,7 +18,7 @@ class AuthController extends Controller
         $credentials = $request->validated();
 
         if(!Auth::attempt($credentials)){
-            return $this->error('', 'Invalid credentials', 401);
+            return $this->error('', 401, 'Invalid credentials');
         }
 
         $user = User::where('email', $credentials['email'])->first();
@@ -40,7 +40,7 @@ class AuthController extends Controller
         ]);
 
         return $this->success([
-            'user' => $user, 
+            'user' => $user,
             'token' => $user->createToken('API token for ' . $user->name)->plainTextToken,
         ]);
     }

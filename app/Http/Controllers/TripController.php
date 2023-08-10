@@ -35,7 +35,7 @@ class TripController extends Controller
     public function show(Trip $trip)
     {
         if(Auth::user()->id !== $trip->user_id){
-            return $this->error('', 'Not authorized.', 403);
+            return $this->error('', 403, 'Not authorized.');
         }
 
         return new TripsResource($trip);
@@ -45,7 +45,7 @@ class TripController extends Controller
     public function update(Request $request, Trip $trip)
     {
         if(Auth::user()->id !== $trip->user_id){
-            return $this->error('', 'Not authorized.', 403);
+            return $this->error('', 403, 'Not authorized.');
         }
 
         $trip->update($request->all());
@@ -57,7 +57,7 @@ class TripController extends Controller
     public function destroy(Trip $trip)
     {
         if(Auth::user()->id !== $trip->user_id){
-            return $this->error('', 'Not authorized.', 403);
+            return $this->error('', 403, 'Not authorized.');
         }
 
         $trip->delete();

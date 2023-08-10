@@ -2,8 +2,10 @@
 
 namespace App\Traits;
 
+use Illuminate\Http\JsonResponse;
+
 trait HttpResponses {
-    protected function success($data, $message = null, $code = 200) 
+    protected function success($data, $code = 200, $message = null): JsonResponse
     {
         return response()->json([
             'status' => 'Success',
@@ -12,7 +14,7 @@ trait HttpResponses {
         ], $code);
     }
 
-    protected function error($data, $message = null, $code) 
+    protected function error($data, $code, $message = null): JsonResponse
     {
         return response()->json([
             'status' => 'Error',
@@ -20,4 +22,4 @@ trait HttpResponses {
             'data' => $data
         ], $code);
     }
-} 
+}

@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Models\Trip;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Trip>
+ * @extends Factory<Trip>
  */
 class TripFactory extends Factory
 {
