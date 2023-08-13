@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Traits\HttpResponses;
-use App\Http\Requests\{StoreUserRequest, LoginUserRequest};
+use App\Http\Requests\LoginUserRequest;
+use App\Http\Requests\LogoutUserRequest;
+use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
-
-use Illuminate\Support\Facades\Hash;
+use App\Traits\HttpResponses;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -17,15 +18,15 @@ class AuthController extends Controller
     {
         $credentials = $request->validated();
 
-        if(!Auth::attempt($credentials)){
-            return $this->error('', 401, 'Invalid credentials');
+        if (! Auth::attempt($credentials)) {
+            return $this->error([], 401, 'Invalid credentials');
         }
 
         $user = User::where('email', $credentials['email'])->first();
 
         return $this->success([
             'user' => $user,
-            'token' => $user->createToken('API token for ' . $user->name)->plainTextToken,
+            'token' => $user->createToken('API token for '.$user->name)->plainTextToken,
         ]);
     }
 
@@ -41,12 +42,17 @@ class AuthController extends Controller
 
         return $this->success([
             'user' => $user,
-            'token' => $user->createToken('API token for ' . $user->name)->plainTextToken,
+            'token' => $user->createToken('API token for '.$user->name)->plainTextToken,
         ]);
     }
 
-    public function logout()
+    public function logout(LogoutUserRequest $request)
     {
-        return response()->json('Logout route');
+        $request->validated($request->all());
+
+        $user = $request->user();
+        $user->tokens()->delete();
+
+        return $this->success();
     }
 }
