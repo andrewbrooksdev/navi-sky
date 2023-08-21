@@ -2,18 +2,21 @@
 
 namespace App\Http\Resources;
 
-use App\Models\User;
+use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @property string $name
  * @property int $id
- * @property mixed $created_at
+ * @property string $name
  * @property mixed $updated_at
- * @property User $user
+ * @property mixed $created_at
+ * @property Trip $trip
+ * @property float $lat
+ * @property float $lng
+ * @property mixed $depart_at
  */
-class TripsResource extends JsonResource
+class WaypointsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -25,15 +28,16 @@ class TripsResource extends JsonResource
         return [
             'id' => (string) $this->id,
             'attributes' => [
-                'name' => $this->name,
+                'lat' => $this->lat,
+                'lng' => $this->lng,
+                'depart_at' => $this->depart_at,
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at,
             ],
             'relationships' => [
-                'user' => [
-                    'id' => (string) $this->user->id,
-                    'name' => (string) $this->user->name,
-                    'email' => (string) $this->user->email,
+                'trip' => [
+                    'id' => (string) $this->trip->id,
+                    'name' => (string) $this->trip->name,
                 ],
             ],
         ];
