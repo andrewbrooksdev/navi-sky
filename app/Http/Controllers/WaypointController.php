@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreWaypointRequest;
 use App\Http\Resources\WaypointsResource;
 use App\Models\Waypoint;
+use App\Traits\HttpResponses;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
 class WaypointController extends Controller
 {
+    use HttpResponses;
+
     public function index()
     {
         return WaypointsResource::collection(
@@ -30,5 +33,16 @@ class WaypointController extends Controller
         ]);
 
         return new WaypointsResource($waypoint);
+    }
+
+    public function destroy(Waypoint $waypoint)
+    {
+        if (Auth::user()->id !== $waypoint->trip->user_id) {
+            return $this->error([], 403, 'Not authorized.');
+        }
+
+        $waypoint->delete();
+
+        return response(null, 204);
     }
 }
