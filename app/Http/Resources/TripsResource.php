@@ -35,6 +35,7 @@ class TripsResource extends JsonResource
                     'name' => (string) $this->user->name,
                     'email' => (string) $this->user->email,
                 ],
+                'waypoints' => WaypointsResource::collection($this->waypoints),
             ],
         ];
     }

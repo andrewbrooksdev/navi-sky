@@ -17,6 +17,8 @@ class Waypoint extends Model
         'depart_at',
     ];
 
+    protected $casts = ['depart_at' => 'datetime'];
+
     public function trip(): BelongsTo
     {
         return $this->belongsTo(Trip::class);
