@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreWaypointRequest;
 use App\Http\Resources\WaypointsResource;
 use App\Models\Waypoint;
+use App\Traits\HttpResponses;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class WaypointController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    use HttpResponses;
+
     public function index()
     {
         return WaypointsResource::collection(
@@ -22,51 +22,27 @@ class WaypointController extends Controller
         );
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(StoreWaypointRequest $request)
     {
-        //
+        $request->validated($request->all());
+        $waypoint = Waypoint::create([
+            'trip_id' => $request->trip_id,
+            'lat' => $request->lat,
+            'lng' => $request->lng,
+            'depart_at' => $request->depart_at,
+        ]);
+
+        return new WaypointsResource($waypoint);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function destroy(Waypoint $waypoint)
     {
-        //
-    }
+        if (Auth::user()->id !== $waypoint->trip->user_id) {
+            return $this->error([], 403, 'Not authorized.');
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $waypoint->delete();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response(null, 204);
     }
 }
